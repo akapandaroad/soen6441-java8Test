@@ -14,6 +14,9 @@ public class TestLLambda {
     List<Employee> employees = Arrays.asList(
             new Employee("jialuwang", 25, 100000),
             new Employee("akapandaroad", 24, 20000),
+            new Employee("aka潘大路", 26, 300000),
+            new Employee("aka潘大路", 26, 300000),
+            new Employee("aka潘大路", 26, 300000),
             new Employee("aka潘大路", 26, 300000)
     );
 
@@ -146,5 +149,65 @@ public class TestLLambda {
                 );
 
     }
+
+    //flatmap
+    @Test
+    public void Test5(){
+
+        List<String> list=Arrays.asList("aaa","bbb","ccc","ddd","eee");
+
+        list.stream().map(TestLLambda::filterLetter).forEach(System.out::println);
+
+        List<String> list2=new ArrayList<>();
+        List<String> list3=new ArrayList<>();
+
+        list2.add("11");
+        list3.add("11");
+
+
+        list2.addAll(list);
+
+        employees.stream().sorted(Comparator.comparing(Employee::getAge)).map(Employee::getName).forEach(System.out::println);
+
+
+
+
+    }
+    public static List<Character> filterLetter(String str){
+
+        List<Character> list=new ArrayList<>();
+        for (Character c:
+             str.toCharArray()) {
+
+            list.add(c);
+        }
+        return list;
+    }
+
+
+    @Test
+    public void Test6(){
+         boolean b1=employees.stream().allMatch(employee -> employee.getName().equals("akapandaroad"));
+
+         boolean b2=employees.stream().anyMatch(employee -> employee.getName().equals("akapandaroad"));
+
+         boolean b3=employees.stream().anyMatch(employee -> {
+             System.out.println("more than 2 ");
+             return employee.getSalary()>2;
+
+         });
+
+        System.out.println(b1);
+        System.out.println(b2);
+        System.out.println(b3);
+
+        Optional<String> res = employees.stream()
+                .max(Comparator.comparingInt(Employee::getSalary)).map(Employee::getName);
+        System.out.println(res.get());
+
+
+    }
+
+
 
 }
