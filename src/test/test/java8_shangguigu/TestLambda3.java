@@ -99,4 +99,15 @@ public class TestLambda3 {
 
     }
 
+
+    @Test
+    public void TestDefault(){
+
+//        MyPredicate.test2();
+        TestInter t=new TestInter();
+        t.hello1();
+
+    }
 }
+
+
